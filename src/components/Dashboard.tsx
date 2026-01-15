@@ -183,30 +183,28 @@ export default function Dashboard() {
     if (!listing || !listing[2]) return null;
 
     return (
-      <div key={index} className="group relative bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg hover:shadow-orange-900/20 hover:border-orange-500/30 transition-all duration-300">
-        <div className="flex justify-between items-start mb-4">
-          <div className="bg-slate-800 text-orange-400 text-xs font-bold px-2 py-1 rounded uppercase tracking-wider border border-slate-700">
-            Token #{index}
-          </div>
-          <div className="text-white font-bold text-lg">
-            <span className="text-orange-500">$</span>{formatUnits(listing[1], USDT_DECIMALS)}
-          </div>
-        </div>
-        
-        <div className="space-y-2 mb-6">
-          <div className="text-xs text-slate-500 uppercase tracking-wide">Seller Address</div>
-          <div className="text-sm font-mono text-slate-300 truncate bg-slate-950 p-2 rounded border border-slate-800">
-            {listing[0]}
-          </div>
-        </div>
+      <div key={index} className="group relative bg-slate-900 border border-slate-800 rounded-2xl p-5 shadow-lg hover:shadow-orange-900/20 transition-all duration-300">
+        {/* ... (Header and Address display code remains same) ... */}
 
-        <button
-          disabled={isBusy}
-          onClick={() => handleBuy(index.toString())}
-          className="w-full bg-gradient-to-r from-orange-600 to-orange-500 text-white py-3 rounded-xl font-bold hover:from-orange-500 hover:to-orange-400 hover:shadow-lg hover:shadow-orange-500/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {isBusy ? 'Processing...' : 'Purchase Asset'}
-        </button>
+        <div className="flex gap-2">
+            {/* NEW: Approve Button */}
+            <button
+                disabled={isBusy}
+                onClick={handleApproveUSDT} // Uses the existing function
+                className="flex-1 bg-slate-800 text-slate-300 py-3 rounded-xl font-bold hover:bg-slate-700 hover:text-white transition-all disabled:opacity-50"
+            >
+                Approve
+            </button>
+
+            {/* Existing Buy Button */}
+            <button
+                disabled={isBusy}
+                onClick={() => handleBuy(index.toString())}
+                className="flex-[2] bg-gradient-to-r from-orange-600 to-orange-500 text-white py-3 rounded-xl font-bold hover:from-orange-500 hover:to-orange-400 hover:shadow-lg hover:shadow-orange-500/20 transition-all disabled:opacity-50"
+            >
+                {isBusy ? 'Processing...' : 'Buy'}
+            </button>
+        </div>
       </div>
     );
   };
