@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧾 InvoiceChain: Compliant RWA Factoring on Mantle
 
-## Getting Started
+_Bridging the $3 Trillion Global Factoring Gap with Decentralized Finance._
 
-First, run the development server:
+InvoiceChain is a decentralized marketplace for Real-World Asset (RWA) factoring. It allows businesses to mint unpaid invoices as NFTs and sell them to investors for instant liquidity (USDT), while ensuring full regulatory compliance via on-chain whitelisting.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+![Dashboard Screenshot](./packages/nextjs/public/dashboard_screenshot.png)
+(Add your actual screenshot here)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Key Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- _📄 Tokenized Invoices:_ Mint legally binding invoices as ERC-721 NFTs with metadata (amount, due date, PDF proof).
+- _✅ Built-in Compliance:_ "KYC-First" architecture. The Marketplace contract restricts buying/selling to whitelisted addresses only.
+- _💸 Instant Settlement:_ Atomic swaps using MockUSDT. No banks, no 3-day wait times.
+- _🔄 Full Lifecycle:_ Mint -> List -> Buy -> Repay. Demonstrates the complete credit cycle.
+- _🛡️ Mantle Network:_ Deployed on Mantle Sepolia for high speed and negligible gas fees.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tech Stack
 
-## Learn More
+- _Blockchain:_ Mantle Sepolia Testnet
+- _Smart Contracts:_ Solidity (ERC-721, ERC-20), Hardhat
+- _Frontend:_ Next.js, TailwindCSS, Scaffold-ETH 2
+- _Libraries:_ Wagmi, Viem, OpenZeppelin
 
-To learn more about Next.js, take a look at the following resources:
+## 📦 Contracts (Mantle Sepolia)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+| Contract      | Address             | Description                            |
+| :------------ | :------------------ | :------------------------------------- |
+| _Marketplace_ | 0x... (Paste yours) | Handles listing, buying, and KYC logic |
+| _InvoiceNFT_  | 0x... (Paste yours) | The Invoice Asset (ERC-721)            |
+| _MockUSDT_    | 0x... (Paste yours) | Stablecoin for payments                |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## ⚡ Getting Started
 
-## Deploy on Vercel
+### Prerequisites
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Node.js (v18+)
+- Yarn
+- MetaMask (configured for Mantle Sepolia)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Installation
+
+1.  _Clone the Repo_
+    bash
+    git clone [https://github.com/YourUsername/InvoiceChain.git](https://github.com/YourUsername/InvoiceChain.git)
+    cd InvoiceChain
+
+2.  _Install Dependencies_
+    bash
+    yarn install
+
+3.  _Deploy Contracts (Mantle Sepolia)_
+    Create a packages/hardhat/.env file with your DEPLOYER_PRIVATE_KEY first.
+    bash
+    yarn hardhat deploy --network mantleSepolia
+
+4.  _Start Frontend_
+    bash
+    yarn start
+
+    Visit http://localhost:3000 to access the DApp.
+
+## 🧪 How to Demo
+
+1.  _Admin Login:_ Connect with the Deployer wallet. You will see the "Admin Control Center".
+2.  _Whitelist User:_ Enter a secondary wallet address (Buyer) to approve them for trading.
+3.  _Mint:_ As a Seller, create an invoice for 10,000 USDT.
+4.  _List:_ Approve the market and list the invoice for 9,500 USDT (discounted).
+5.  _Buy:_ Switch to the Whitelisted Buyer wallet, approve USDT, and buy the invoice.
+6.  _Repay:_ Simulate the invoice payment date by repaying the full 10,000 USDT to the holder.
+
+## 📜 License
+
+MIT

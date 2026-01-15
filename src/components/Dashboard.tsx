@@ -170,6 +170,7 @@ export default function Dashboard() {
 
   const ListingCard = ({ index, result }: { index: number, result: any }) => {
     const listing = result?.result;
+    // Safety check: ensure listing exists and is active (index 2 is isActive bool)
     if (!listing || !listing[2]) return null;
 
     const isSelected = selectedCard === index;
@@ -184,9 +185,9 @@ export default function Dashboard() {
         }`}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-        <div className="absolute -inset-0.5 bg-gradient-to-r from-orange-600 to-pink-600 rounded-3xl opacity-0 group-hover:opacity-20 blur transition-opacity duration-500" />
         
         <div className="relative z-10">
+          {/* HEADER: ID & Price */}
           <div className="flex justify-between items-start mb-6">
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/30 group-hover:shadow-orange-500/50 transition-shadow">
@@ -205,6 +206,7 @@ export default function Dashboard() {
             </div>
           </div>
 
+          {/* SELLER INFO */}
           <div className="space-y-3 mb-6">
             <div className="flex items-center gap-2">
               <ShieldIcon />
@@ -217,6 +219,7 @@ export default function Dashboard() {
             </div>
           </div>
 
+          {/* STATUS GRID */}
           <div className="grid grid-cols-2 gap-3 mb-6">
             <div className="bg-slate-950/50 backdrop-blur-sm p-3 rounded-xl border border-slate-800">
               <div className="flex items-center gap-2 mb-1">
@@ -234,19 +237,31 @@ export default function Dashboard() {
             </div>
           </div>
 
-          <button
-            disabled={isBusy}
-            onClick={(e) => {
-              e.stopPropagation();
-              handleBuy(index.toString());
-            }}
-            className="w-full bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 transform hover:scale-[1.02] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100 relative overflow-hidden group"
-          >
-            <span className="relative z-10">
-              {isBusy ? 'Processing...' : 'Purchase Asset'}
-            </span>
-            <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-          </button>
+          {/* ACTION BUTTONS (Approve + Buy) */}
+          <div className="flex gap-3">
+            <button
+              disabled={isBusy}
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent card click
+                handleApproveUSDT();
+              }}
+              className="flex-1 py-4 bg-slate-800 text-slate-300 rounded-2xl font-bold text-lg border border-slate-700 hover:bg-slate-700 hover:text-white transition-all disabled:opacity-50"
+            >
+              Approve
+            </button>
+
+            <button
+              disabled={isBusy}
+              onClick={(e) => {
+                e.stopPropagation(); // Prevent card click
+                handleBuy(index.toString());
+              }}
+              className="flex-[2] bg-gradient-to-r from-orange-600 via-orange-500 to-orange-600 text-white py-4 rounded-2xl font-bold text-lg shadow-lg shadow-orange-500/30 hover:shadow-orange-500/50 transform hover:scale-[1.02] transition-all disabled:opacity-50"
+            >
+              {isBusy ? '...' : 'Purchase'}
+            </button>
+          </div>
+          
         </div>
       </div>
     );
