@@ -1,10 +1,11 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
   // 1. Ignore TypeScript Errors
   typescript: {
     ignoreBuildErrors: true,
   },
-  // 2. Fix the WalletConnect/Mobile issue
+  // 2. Webpack fix for WalletConnect
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
