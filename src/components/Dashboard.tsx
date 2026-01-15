@@ -26,8 +26,7 @@ import {
 } from '../constants';
 
 const USDT_DECIMALS = 6;
-const FEED_IDS = [0n, 1n, 2n]; 
-
+const FEED_IDS = Array.from({ length: 20 }, (_, i) => BigInt(i));
 type OpType = 'MINT' | 'APPROVE_NFT' | 'LIST' | 'APPROVE_USDT' | 'BUY' | 'CANCEL' | 'REPAY' | 'WHITELIST' | null;
 type PageType = 'marketplace' | 'mint' | 'list' | 'repay' | 'cancel';
 
