@@ -26,7 +26,10 @@ import {
 } from '../constants';
 
 const USDT_DECIMALS = 6;
-const FEED_IDS = [0n, 1n, 2n]; 
+// OLD: const FEED_IDS = [0n, 1n, 2n];
+
+// NEW: Check the first 20 IDs automatically
+const FEED_IDS = Array.from({ length: 200 }, (_, i) => BigInt(i));
 
 // Define operation types
 type OpType = 'MINT' | 'APPROVE_NFT' | 'LIST' | 'APPROVE_USDT' | 'BUY' | 'CANCEL' | 'REPAY' | 'WHITELIST' | null;
