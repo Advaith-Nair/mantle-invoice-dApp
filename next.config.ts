@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // 1. Ignore TypeScript Errors
+  // 1. Ignore TypeScript Errors (This key still works)
   typescript: {
     ignoreBuildErrors: true,
   },
-  // 2. The Critical Webpack Fix for WalletConnect
+  // 2. The Critical Webpack Fix
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,
